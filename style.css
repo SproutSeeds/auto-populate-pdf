@@ -1,0 +1,9 @@
+/* .container {
+  height: 700px;
+  width: 700px;
+} */
+.text-area-main {
+  /* height: 70vh;
+  width: 70vh; */
+  overflow-y: scroll;
+}
