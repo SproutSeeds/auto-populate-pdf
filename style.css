@@ -7,3 +7,9 @@
   width: 70vh; */
   overflow-y: scroll;
 }
+.btn-group {
+  float: right;
+  margin-right: 23.8vw;
+  margin-top: 0.5vw;
+  margin-bottom: 0.2vw;
+}
