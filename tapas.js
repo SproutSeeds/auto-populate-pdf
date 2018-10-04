@@ -140,7 +140,7 @@ function mapTextTapas(textData) {
   for (var i = 0; i < lines.length; i++) {
     tapasPopulatedFields[i] = lines[i];
   }
-  console.log(tapasPopulatedFields);
+  // console.log(tapasPopulatedFields);
   for (var i = 0; i < tapasPopulatedFields.length; i++) {
     if (tapasPopulatedFields[i] === tapasPopulatedFields[0]) {
       // 0: "Name of couple: Caleb & Anna Clark"
@@ -215,7 +215,7 @@ function mapTextTapas(textData) {
       tapasPopulatedFields[i] = tapasPopulatedFields[i].substring(6);
     }
   }
-  console.log(tapasPopulatedFields);
+  // console.log(tapasPopulatedFields);
 }
 
 // 0: "Name of couple: Caleb & Anna Clark"
