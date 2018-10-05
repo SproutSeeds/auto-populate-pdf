@@ -52,46 +52,99 @@ $("#tapas-button").click(function() {
   let doc = new jsPDF({
     orientation: "landscape"
   });
+
+  let fontSize = 12;
+
+  function countMenuCharacters() {
+    // If string is longer than 36 characters, reduce fontsize by 2 points.
+    for (let i = 0; i < tapasPopulatedFields.length; i++) {
+      if (tapasPopulatedFields[i].length > 36) {
+        fontSize = 10;
+      }
+      if (tapasPopulatedFields[i].length > 50) {
+        fontSize = 8;
+      }
+      if (tapasPopulatedFields[i].length > 66) {
+        fontSize = 6;
+      }
+    }
+  }
+  function countPreferenceCharacters() {
+    // If string is longer than 36 characters, reduce fontsize by 2 points.
+    for (let i = 0; i < tapasPopulatedFields.length; i++) {
+      if (tapasPopulatedFields[i].length > 60) {
+        fontSize = 10;
+      }
+      if (tapasPopulatedFields[i].length > 70) {
+        fontSize = 8;
+      }
+      if (tapasPopulatedFields[i].length > 100) {
+        fontSize = 6;
+      }
+    }
+  }
+
   // PAGE 1
   doc.addImage(tapas1, "JPEG", 0, 0, 297, 210);
-  doc.setFontSize(14);
+
+  if (tapasPopulatedFields[0].length > 30) {
+    fontSize = 10;
+  }
+  doc.setFontSize(fontSize);
   // Couple Names
-  doc.text(222, 92, tapasPopulatedFields[0]);
+  doc.text(225, 92, tapasPopulatedFields[0]);
+
+  if (tapasPopulatedFields[1].length > 30) {
+    fontSize = 10;
+  }
+  doc.setFontSize(fontSize);
   // Reservation Name
   doc.text(232, 111, tapasPopulatedFields[1]);
+
+  if (tapasPopulatedFields[2].length > 38) {
+    fontSize = 10;
+  }
+  doc.setFontSize(fontSize);
   // Reservation Time
-  doc.text(209, 131, tapasPopulatedFields[2]);
+  doc.text(220, 131, tapasPopulatedFields[2]);
 
   doc.addPage();
 
+  countMenuCharacters();
+
   // PAGE 2
   doc.addImage(tapas2, "JPEG", 0, 0, 297, 210);
-  doc.setFontSize(12);
+  doc.setFontSize(fontSize);
   // Round 1 Drinks
-  doc.text(11, 38.5, tapasPopulatedFields[4]);
-  doc.text(11, 45.5, tapasPopulatedFields[5]);
+  doc.text(5, 38.5, tapasPopulatedFields[4]);
+  doc.text(5, 45.5, tapasPopulatedFields[5]);
   // First Course Apps
-  doc.text(11, 60, tapasPopulatedFields[6]);
-  doc.text(11, 67, tapasPopulatedFields[7]);
-  doc.text(11, 74, tapasPopulatedFields[8]);
-  doc.text(11, 81, tapasPopulatedFields[9]);
+  doc.text(5, 60, tapasPopulatedFields[6]);
+  doc.text(5, 67, tapasPopulatedFields[7]);
+  doc.text(5, 74, tapasPopulatedFields[8]);
+  doc.text(5, 81, tapasPopulatedFields[9]);
   // Round 2 Drinks
-  doc.text(11, 96, tapasPopulatedFields[10]);
-  doc.text(11, 103, tapasPopulatedFields[11]);
+  doc.text(5, 96, tapasPopulatedFields[10]);
+  doc.text(5, 103, tapasPopulatedFields[11]);
   // Entrees
-  doc.text(11, 117, tapasPopulatedFields[12]);
-  doc.text(11, 124, tapasPopulatedFields[13]);
-  doc.text(11, 131, tapasPopulatedFields[14]);
-  doc.text(11, 138, tapasPopulatedFields[15]);
+  doc.text(5, 117, tapasPopulatedFields[12]);
+  doc.text(5, 124, tapasPopulatedFields[13]);
+  doc.text(5, 131, tapasPopulatedFields[14]);
+  doc.text(5, 138, tapasPopulatedFields[15]);
   // Desserts
-  doc.text(11, 152, tapasPopulatedFields[16]);
+  doc.text(5, 152, tapasPopulatedFields[16]);
 
   doc.setTextColor(40, 93, 212);
   // Name of First Person
+  doc.setFontSize(12);
   doc.text(120, 34, tapasPopulatedFields[17]);
   doc.setTextColor(0, 0, 0);
+  // If characters in string are greater than 60, reduce fontsize by 2 points.
+
+  countPreferenceCharacters();
 
   // First Name Allergies
+  doc.setFontSize(fontSize);
   doc.text(137, 41, tapasPopulatedFields[18]);
   // First Name Dietary Restrictions
   doc.text(154, 46.5, tapasPopulatedFields[19]);
@@ -108,10 +161,12 @@ $("#tapas-button").click(function() {
 
   doc.setTextColor(40, 93, 212);
   // Name of Second Person
+  doc.setFontSize(12);
   doc.text(120, 89, tapasPopulatedFields[29]);
   doc.setTextColor(0, 0, 0);
 
   // Second Name Allergies
+  doc.setFontSize(fontSize);
   doc.text(137, 96, tapasPopulatedFields[30]);
   // Second Name Dietary Restrictions
   doc.text(154, 101.5, tapasPopulatedFields[31]);

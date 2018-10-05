@@ -133,42 +133,93 @@ $("#standard-button").click(function() {
     orientation: "landscape"
   });
 
+  let fontSize = 12;
+
+  function countMenuCharacters() {
+    // If string is longer than 36 characters, reduce fontsize by 2 points.
+    for (let i = 0; i < populatedFields.length; i++) {
+      if (populatedFields[i].length > 36) {
+        fontSize = 10;
+      }
+      if (populatedFields[i].length > 50) {
+        fontSize = 8;
+      }
+      if (populatedFields[i].length > 66) {
+        fontSize = 6;
+      }
+    }
+  }
+  function countPreferenceCharacters() {
+    // If string is longer than 36 characters, reduce fontsize by 2 points.
+    for (let i = 0; i < populatedFields.length; i++) {
+      if (populatedFields[i].length > 60) {
+        fontSize = 10;
+      }
+      if (populatedFields[i].length > 70) {
+        fontSize = 8;
+      }
+      if (populatedFields[i].length > 100) {
+        fontSize = 6;
+      }
+    }
+  }
+
+  // 123456789,123456789,123456789,123456
   // PAGE 1
   doc.addImage(standard1, "JPEG", 0, 0, 297, 210);
-  doc.setFontSize(14);
+
+  if (populatedFields[0].length > 30) {
+    fontSize = 10;
+  }
+  doc.setFontSize(fontSize);
   // Couple Names
-  doc.text(222, 92, populatedFields[0]);
+  doc.text(225, 92, populatedFields[0]);
+
+  if (populatedFields[1].length > 30) {
+    fontSize = 10;
+  }
+  doc.setFontSize(fontSize);
   // Reservation Name
   doc.text(232, 111, populatedFields[1]);
+
+  if (populatedFields[2].length > 38) {
+    fontSize = 10;
+  }
+  doc.setFontSize(fontSize);
   // Reservation Time
-  doc.text(209, 131, populatedFields[2]);
+  doc.text(220, 131, populatedFields[2]);
 
   doc.addPage();
 
+  countMenuCharacters();
+  doc.setFontSize(fontSize);
+
   // PAGE 2
   doc.addImage(standard2, "JPEG", 0, 0, 297, 210);
-  doc.setFontSize(12);
   // Round 1 Drinks
-  doc.text(11, 39, populatedFields[4]);
-  doc.text(11, 46, populatedFields[5]);
+  doc.text(5, 39, populatedFields[4]);
+  doc.text(5, 46, populatedFields[5]);
   // First Course Apps
-  doc.text(11, 60, populatedFields[6]);
-  doc.text(11, 67, populatedFields[7]);
+  doc.text(5, 60, populatedFields[6]);
+  doc.text(5, 67, populatedFields[7]);
   // Round 2 Drinks
-  doc.text(11, 81.5, populatedFields[8]);
-  doc.text(11, 88.5, populatedFields[9]);
+  doc.text(5, 81.5, populatedFields[8]);
+  doc.text(5, 88.5, populatedFields[9]);
   // Entrees
-  doc.text(11, 102.5, populatedFields[10]);
-  doc.text(11, 109.5, populatedFields[11]);
+  doc.text(5, 102.5, populatedFields[10]);
+  doc.text(5, 109.5, populatedFields[11]);
   // Desserts
-  doc.text(11, 125, populatedFields[12]);
+  doc.text(5, 125, populatedFields[12]);
 
   doc.setTextColor(40, 93, 212);
   // Name of First Person
+  doc.setFontSize(12);
   // 13: "CALEB CLARK"
   doc.text(120, 34, populatedFields[13]);
   doc.setTextColor(0, 0, 0);
 
+  countPreferenceCharacters();
+  doc.setFontSize(fontSize);
   // First Name Allergies
   // 14: "Allergies: N/A"
   doc.text(137, 41, populatedFields[14]);
@@ -193,10 +244,12 @@ $("#standard-button").click(function() {
 
   doc.setTextColor(40, 93, 212);
   // Name of Second Person
+  doc.setFontSize(12);
   // 25: "ANNA CLARK"
   doc.text(120, 89, populatedFields[25]);
   doc.setTextColor(0, 0, 0);
 
+  doc.setFontSize(fontSize);
   // Second Name Allergies
   // 26: "Allergies: N/A"
   doc.text(137, 96, populatedFields[26]);
@@ -251,46 +304,6 @@ function mapText(textData) {
       // 3: "Additional Note: "
       populatedFields[i] = populatedFields[i].substring(17);
     }
-    // if (populatedFields[i] === populatedFields[4]) {
-    //   // 4: "	.	Caleb: Bottle of Red Wine"
-    //   populatedFields[i] = populatedFields[i].substring(3);
-    // }
-    // if (populatedFields[i] === populatedFields[5]) {
-    //   // 5: "	.	Anna: Bottle of Red Wine"
-    //   populatedFields[i] = populatedFields[i].substring(3);
-    // }
-    // if (populatedFields[i] === populatedFields[6]) {
-    //   // 6: "	.	Spinach-Chickpea Cazuela"
-    //   populatedFields[i] = populatedFields[i].substring(3);
-    // }
-    // if (populatedFields[i] === populatedFields[7]) {
-    //   // 7: "	.	Pan Con Tomate"
-    //   populatedFields[i] = populatedFields[i].substring(3);
-    // }
-    // if (populatedFields[i] === populatedFields[8]) {
-    //   // 8: "	.	Caleb: N/A"
-    //   populatedFields[i] = populatedFields[i].substring(3);
-    // }
-    // if (populatedFields[i] === populatedFields[9]) {
-    //   // 9: "	.	Anna: N/A"
-    //   populatedFields[i] = populatedFields[i].substring(3);
-    // }
-    // if (populatedFields[i] === populatedFields[10]) {
-    //   // 10: "	.	Hanger Steak"
-    //   populatedFields[i] = populatedFields[i].substring(3);
-    // }
-    // if (populatedFields[i] === populatedFields[11]) {
-    //   // 11: "	.	Calamari a la Plancha"
-    //   populatedFields[i] = populatedFields[i].substring(3);
-    // }
-    // if (populatedFields[i] === populatedFields[12]) {
-    //   // 12: "	.	N/A"
-    //   populatedFields[i] = populatedFields[i].substring(3);
-    // }
-    // if (populatedFields[i] === populatedFields[13]) {
-    //   // 13: "CALEB CLARK"
-    //   populatedFields[i] = populatedFields[i].substring(3);
-    // }
     if (populatedFields[i] === populatedFields[14]) {
       // 14: "Allergies: N/A"
       populatedFields[i] = populatedFields[i].substring(11);
@@ -319,10 +332,6 @@ function mapText(textData) {
       // 24: "Beer: N/A"
       populatedFields[i] = populatedFields[i].substring(6);
     }
-    // if (populatedFields[i] === populatedFields[25]) {
-    //   // 25: "ANNA CLARK"
-    //   populatedFields[i] = populatedFields[i].substring(11);
-    // }
     if (populatedFields[i] === populatedFields[26]) {
       // 26: "Allergies: N/A"
       populatedFields[i] = populatedFields[i].substring(11);
@@ -352,7 +361,7 @@ function mapText(textData) {
       populatedFields[i] = populatedFields[i].substring(6);
     }
   }
-  // console.log(populatedFields);
+  console.log(populatedFields);
 }
 
 // 0: "Name of couple: Caleb & Anna Clark"

@@ -52,50 +52,98 @@ $("#sushi-button").click(function() {
   let doc = new jsPDF({
     orientation: "landscape"
   });
+
+  let fontSize = 12;
+
+  function countMenuCharacters() {
+    // If string is longer than 36 characters, reduce fontsize by 2 points.
+    for (let i = 0; i < sushiPopulatedFields.length; i++) {
+      if (sushiPopulatedFields[i].length > 36) {
+        fontSize = 10;
+      }
+      if (sushiPopulatedFields[i].length > 50) {
+        fontSize = 8;
+      }
+      if (sushiPopulatedFields[i].length > 66) {
+        fontSize = 6;
+      }
+    }
+  }
+  function countPreferenceCharacters() {
+    // If string is longer than 36 characters, reduce fontsize by 2 points.
+    for (let i = 0; i < sushiPopulatedFields.length; i++) {
+      if (sushiPopulatedFields[i].length > 60) {
+        fontSize = 10;
+      }
+      if (sushiPopulatedFields[i].length > 70) {
+        fontSize = 8;
+      }
+      if (sushiPopulatedFields[i].length > 100) {
+        fontSize = 6;
+      }
+    }
+  }
+
   // PAGE 1
   doc.addImage(sushi1, "JPEG", 0, 0, 297, 210);
-  doc.setFontSize(14);
+
+  if (sushiPopulatedFields[0].length > 30) {
+    fontSize = 10;
+  }
+  doc.setFontSize(fontSize);
   // Couple Names
-  // 0: "Name of couple: Caleb & Anna Clark"
-  doc.text(222, 92, sushiPopulatedFields[0]);
+  doc.text(225, 92, sushiPopulatedFields[0]);
+
+  if (sushiPopulatedFields[1].length > 30) {
+    fontSize = 10;
+  }
+  doc.setFontSize(fontSize);
   // Reservation Name
-  // 1: "Reservation Name: Caleb Clark"
   doc.text(232, 111, sushiPopulatedFields[1]);
+
+  if (sushiPopulatedFields[2].length > 38) {
+    fontSize = 10;
+  }
+  doc.setFontSize(fontSize);
   // Reservation Time
-  // 2: "Reservation Date/Time: Monday, October 1st @ 7:00pm"
-  doc.text(209, 131, sushiPopulatedFields[2]);
+  doc.text(220, 131, sushiPopulatedFields[2]);
 
   doc.addPage();
 
+  countMenuCharacters();
+  doc.setFontSize(fontSize);
   // PAGE 2
   doc.addImage(sushi2, "JPEG", 0, 0, 297, 210);
-  doc.setFontSize(12);
   // Round 1 Drinks
-  doc.text(11, 38.5, sushiPopulatedFields[4]);
-  doc.text(11, 45.5, sushiPopulatedFields[5]);
+  doc.text(5, 38.5, sushiPopulatedFields[4]);
+  doc.text(5, 45.5, sushiPopulatedFields[5]);
   // First Course Apps
-  doc.text(11, 60, sushiPopulatedFields[6]);
-  doc.text(11, 67, sushiPopulatedFields[7]);
-  doc.text(11, 74, sushiPopulatedFields[8]);
-  doc.text(11, 81, sushiPopulatedFields[9]);
-  doc.text(11, 88, sushiPopulatedFields[10]);
-  doc.text(11, 95, sushiPopulatedFields[11]);
+  doc.text(5, 60, sushiPopulatedFields[6]);
+  doc.text(5, 67, sushiPopulatedFields[7]);
+  doc.text(5, 74, sushiPopulatedFields[8]);
+  doc.text(5, 81, sushiPopulatedFields[9]);
+  doc.text(5, 88, sushiPopulatedFields[10]);
+  doc.text(5, 95, sushiPopulatedFields[11]);
   // Round 2 Drinks
-  doc.text(11, 111, sushiPopulatedFields[12]);
-  doc.text(11, 118, sushiPopulatedFields[13]);
+  doc.text(5, 111, sushiPopulatedFields[12]);
+  doc.text(5, 118, sushiPopulatedFields[13]);
   // Entrees
-  doc.text(11, 132, sushiPopulatedFields[14]);
-  doc.text(11, 139, sushiPopulatedFields[15]);
-  doc.text(11, 146, sushiPopulatedFields[16]);
-  doc.text(11, 153, sushiPopulatedFields[17]);
+  doc.text(5, 132, sushiPopulatedFields[14]);
+  doc.text(5, 139, sushiPopulatedFields[15]);
+  doc.text(5, 146, sushiPopulatedFields[16]);
+  doc.text(5, 153, sushiPopulatedFields[17]);
   // Desserts
-  doc.text(11, 168, sushiPopulatedFields[18]);
+  doc.text(5, 168, sushiPopulatedFields[18]);
 
   doc.setTextColor(40, 93, 212);
   // Name of First Person
+  doc.setFontSize(12);
   // 19: "CALEB CLARK"
   doc.text(120, 34, sushiPopulatedFields[19]);
   doc.setTextColor(0, 0, 0);
+
+  countPreferenceCharacters();
+  doc.setFontSize(fontSize);
 
   // First Name Allergies
   // 20: "Allergies: N/A"
@@ -121,10 +169,12 @@ $("#sushi-button").click(function() {
 
   doc.setTextColor(40, 93, 212);
   // Name of Second Person
+  doc.setFontSize(12);
   // 31: "ANNA CLARK"
   doc.text(120, 89, sushiPopulatedFields[31]);
   doc.setTextColor(0, 0, 0);
 
+  doc.setFontSize(fontSize);
   // Second Name Allergies
   doc.text(137, 96, sushiPopulatedFields[32]);
   // Second Name Dietary Restrictions
